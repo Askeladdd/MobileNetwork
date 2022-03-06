@@ -16,21 +16,26 @@ import java.util.Arrays;
 
 public class SubscribersCsv {
     private Subscribers subscribers; //Список абонентов
-    String[] Headers = { "id", "numbers", "balance", "plan"};
+    String[] Headers = { "id", "number", "balance", "plan"};
+    String fileName = "src/com/company/data/subscribers.csv";
 
     public SubscribersCsv(Subscribers subscribers) {
         this.subscribers = subscribers;
     }
 
+    public Subscribers getSubscribers() {
+        return subscribers;
+    }
+
     public void write() throws IOException {
-        FileWriter out = new FileWriter("src/com/company/data/subscribers.csv");
+        FileWriter out = new FileWriter(fileName);
         try (CSVPrinter printer = new CSVPrinter(out, CSVFormat.DEFAULT
                 .withHeader(Headers))) {
             subscribers.getSubscribers().stream()
                     .forEach(subscriber ->
                     {
                         try {
-                            printer.printRecord(subscriber.getPerson().getId(), Arrays.toString(subscriber.getNumbers().toArray()),
+                            printer.printRecord(subscriber.getPerson().getId(), subscriber.getNumber(),
                                     subscriber.getBalance(), subscriber.getPlan().getName());
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -45,7 +50,7 @@ public class SubscribersCsv {
         PersonsCsv personsCsv = new PersonsCsv(persons);
         personsCsv.read();
 
-        Reader in = new FileReader("src/com/company/data/subscribers.csv");
+        Reader in = new FileReader(fileName);
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.withHeader(Headers).withSkipHeaderRecord(true).parse(in);
         subscribers.getSubscribers().clear();
         for (CSVRecord record : records) {
@@ -55,13 +60,12 @@ public class SubscribersCsv {
             Person person = persons.getById(id);
             Subscriber subscriber = new Subscriber(person);
             subscribers.add(subscriber);
-            String[] arr = record.get(1).replaceAll("^[\\s]+|[\\s]+$|\\[|\\]","").split(",");
-            subscriber.setNumbers(Arrays.asList(arr));
+            subscriber.setNumber(record.get(1));
             subscriber.setBalance(Integer.parseInt(record.get(2)));
             //subscribers.getSubscribers().get(id).setPlan(record.get(2)); ? Plan
         }
 
-        subscribers.getSubscribers().stream().forEach(subscriber-> System.out.println(subscriber));
+        //subscribers.getSubscribers().stream().forEach(subscriber-> System.out.println(subscriber));
     }
 
 }

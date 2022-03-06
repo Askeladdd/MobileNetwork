@@ -12,19 +12,19 @@ public class Person {
     private String passport; //Номер паспорта
     private String address; //Адрес
 
-    public Person(String firstName, String patronymic, String lastName, String passport, String address) {
+    public Person(String lastName, String firstName, String patronymic, String passport, String address) {
         id = count.incrementAndGet();
-        this.firstName = firstName;
         this.lastName = lastName;
+        this.firstName = firstName;
         this.patronymic = patronymic;
         this.passport = passport;
         this.address = address;
     }
 
-    public Person(int id, String firstName, String patronymic, String lastName, String passport, String address) {
+    public Person(int id, String lastName, String firstName, String patronymic, String passport, String address) {
         this.id = id;
-        this.firstName = firstName;
         this.lastName = lastName;
+        this.firstName = firstName;
         this.patronymic = patronymic;
         this.passport = passport;
         this.address = address;

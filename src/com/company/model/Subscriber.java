@@ -1,31 +1,23 @@
 package com.company.model;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 /*
-Абонент мобильной сети
+Абонент мобильной сети (номер телефона)
  */
 public class Subscriber {
-
-    Person person; //Личные данные
-
-    private List<String> numbers = new LinkedList<>(); //Номера абонента
+    private Person person; //Личные данные
+    private String number; //Номера абонента
     private long balance; //Баланс (коп.)
     private Plan plan;
 
     public Subscriber(Person person){
-
         this.person = person;
     }
 
     public Person getPerson() {
         return person;
-    }
-
-    public void addNumber(String number){
-        numbers.add(number);
     }
 
     public void setBalance(long balance) {
@@ -36,8 +28,8 @@ public class Subscriber {
         this.plan = plan;
     }
 
-    public  List<String> getNumbers() {
-        return numbers;
+    public  String getNumber() {
+        return number;
     }
 
     public long getBalance() {
@@ -48,8 +40,8 @@ public class Subscriber {
         return plan;
     }
 
-    public void setNumbers(List<String> numbers) {
-        this.numbers = numbers;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public long getId(){
@@ -59,9 +51,9 @@ public class Subscriber {
     @Override
     public String toString() {
         return "Subscriber{" +
-                "numbers=" + Arrays.toString(numbers.toArray()) +
+                "number=" + number +
                 ", balance=" + balance +
-                ", plan=" + plan +
+                ", plan=" + plan.getName() +
                 '}';
     }
 }

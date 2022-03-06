@@ -18,7 +18,7 @@ public class Volumes {
         volumes.remove(volume);
     }
 
-    public Volume getById(int id){
+    public Volume getById(long id){
         Volume result = null;
         result = volumes.stream().filter(volume->volume.getId()==id).findFirst().get();
         return result;
