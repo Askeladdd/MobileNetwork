@@ -43,14 +43,25 @@ class PlansCsvTest {
         }
 
         Plan plan1 = new Plan("План А");
-        for (int i=1; i<=4; i++)
-        plan1.addVolume(volumes.getById(i));
-
-        plan1.addVolume(volumes.getById(7));
+        for (int i=1; i<=8; i++)
+            plan1.addVolume(volumes.getById(i));
 
         Plan plan2 = new Plan("План Б");
+        for (int i=9; i<=20; i++)
+            plan2.addVolume(volumes.getById(i));
+
+        Plan plan3 = new Plan("План В");
+        for (int i=21; i<=32; i++)
+            plan3.addVolume(volumes.getById(i));
+
+        Plan plan4 = new Plan("План Г");
+        for (int i=33; i<=45; i++)
+            plan4.addVolume(volumes.getById(i));
+
         plans.add(plan1);
         plans.add(plan2);
+        plans.add(plan3);
+        plans.add(plan4);
 
         PlansCsv plansCsv = new PlansCsv(plans);
         try {
@@ -65,17 +76,21 @@ class PlansCsvTest {
     @Test
     @Order(3)
     void readFile() {
+        Volumes volumes = new Volumes();
+        VolumesCsv volumesCsv = new VolumesCsv(volumes);
+        try {
+            volumesCsv.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Plans plansNew = new Plans();
 
-        Volume volume1 = new Volume(1, "Звонки внутри сети", "мин", 1);
-        Volume volume2 = new Volume(2, "Звонки в другие сети", "мин", 2);
-        Plan plan1 = new Plan(1, "План А");
-        Plan plan2 = new Plan(2, "План Б");
-        plan1.addVolume(volume1);
-        plan1.addVolume(volume2);
+        Plan plan1 = new Plan("План А");
+        for (int i=1; i<=8; i++)
+            plan1.addVolume(volumes.getById(i));
 
         plansNew.add(plan1);
-        plansNew.add(plan2);
 
         PlansCsv plansCsv = new PlansCsv(plans);
         try {
