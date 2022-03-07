@@ -1,5 +1,6 @@
 import com.company.csv.PersonsCsv;
 import com.company.csv.PlansCsv;
+import com.company.csv.VolumesCsv;
 import com.company.model.*;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -33,13 +34,21 @@ class PlansCsvTest {
     @Test
     @Order(2)
     void writeFile() {
-        Volume volume1 = new Volume("Звонки внутри сети", "мин", 1);
-        Volume volume2 = new Volume("Звонки в другие сети", "мин", 2);
-        Plan plan1 = new Plan("План А");
-        Plan plan2 = new Plan("План Б");
-        plan1.addVolume(volume1);
-        plan1.addVolume(volume2);
+        Volumes volumes = new Volumes();
+        VolumesCsv volumesCsv = new VolumesCsv(volumes);
+        try {
+            volumesCsv.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        Plan plan1 = new Plan("План А");
+        for (int i=1; i<=4; i++)
+        plan1.addVolume(volumes.getById(i));
+
+        plan1.addVolume(volumes.getById(7));
+
+        Plan plan2 = new Plan("План Б");
         plans.add(plan1);
         plans.add(plan2);
 
