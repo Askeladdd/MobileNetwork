@@ -43,14 +43,22 @@ class PlansCsvTest {
         }
 
         Plan plan1 = new Plan("План А");
-        for (int i=1; i<=4; i++)
-        plan1.addVolume(volumes.getById(i));
+        for (int i=1; i<=8; i++)
+            plan1.addVolume(volumes.getById(i));
 
-        plan1.addVolume(volumes.getById(7));
+
 
         Plan plan2 = new Plan("План Б");
-        plans.add(plan1);
-        plans.add(plan2);
+        for (int i=9; i<=20; i++)
+            plan1.addVolume(volumes.getById(i));
+
+        Plan plan3 = new Plan("План В");
+        for (int i=21; i<=32; i++)
+            plan1.addVolume(volumes.getById(i));
+
+        Plan plan4 = new Plan("План Г");
+        for (int i=22; i<=45; i++)
+            plan1.addVolume(volumes.getById(i));
 
         PlansCsv plansCsv = new PlansCsv(plans);
         try {
