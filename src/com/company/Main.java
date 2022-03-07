@@ -1,7 +1,6 @@
 package com.company;
 
-import com.company.actions.PersonsActions;
-import com.company.model.CheckNumber;
+import com.company.actions.AllActions;
 import java.io.IOException;
 
 /*
@@ -9,8 +8,8 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        PersonsActions personsActions = new PersonsActions();
-        personsActions.showMenu();
+        AllActions allActions = new AllActions();
+        allActions.showMenu();
     }
 }
 

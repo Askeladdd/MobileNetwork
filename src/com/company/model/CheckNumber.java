@@ -18,6 +18,11 @@ public class CheckNumber{
 
     private void check(){
         isValid = number.matches(regex);
+        if (!isValid) try {
+            throw new CheckNumberException(number);
+        } catch (CheckNumberException e) {
+            e.printStackTrace();
+        }
         //Проверить, является ли номер номером из этой же сети, из другой сети или роумингом
         country = number.substring(0,5);
         operator = number.substring(6,8);

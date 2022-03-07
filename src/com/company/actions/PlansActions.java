@@ -1,32 +1,28 @@
 package com.company.actions;
 
-import com.company.csv.PersonsCsv;
-import com.company.model.Persons;
+import com.company.csv.PlansCsv;
+import com.company.model.Plans;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-public class PersonsActions {
+public class PlansActions {
     private String[] actions = {
-            "Создать пользователя",
-            "Отобразить всех пользователей",
-            "Отобразить пользователя по id",
-            "Удалить пользователя по id",
+            "Добавить план",
+            "Отобразить все планы",
+            "Отобразить план по id",
     "Выход"};
-    private String[] fields = {"Введите фамилию: ",
-            "Введите имя: ",
-            "Введите отчество: ",
-            "Введите номер паспорта: ",
-            "Введите адрес: "};
+    private String[] fields = {"Введите название плана: "
+    };
     private Scanner scanner = new Scanner(System.in);
 
-    private Persons persons = new Persons();
+    private Plans plans = new Plans();
 
-    public PersonsActions() {
+    public PlansActions() {
         //Прочитать из файла всех пользователей
-        PersonsCsv personsCsv = new PersonsCsv(persons);
+        PlansCsv plansCsv = new PlansCsv(plans);
         try {
-            personsCsv.read();
+            plansCsv.read();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,9 +44,6 @@ public class PersonsActions {
                 showById();
                 break;
             case 4:
-                deleteById();
-                break;
-            case 5:
                 exit();
                 break;
         }
@@ -62,27 +55,20 @@ public class PersonsActions {
     }
 
     public void showAll() {
-        persons.getPersons().stream().forEach(person->System.out.println(person));
+        System.out.println("show all");
         showMenu();
     }
 
     public void showById() {
-        System.out.println("Введите id: ");
-        int id = scanner.nextInt();
-        System.out.println(persons.getById(id));
-        showMenu();
-    }
-
-    public void deleteById() {
-        System.out.println("delete by id");
+        System.out.println("show by id");
         System.out.println("Введите id");
         int id = scanner.nextInt();
         System.out.println("id= " + id);
         showMenu();
     }
 
-    public void exit(){
-        System.out.println("exit");
-    }
+public void exit(){
+    System.out.println("exit");
+}
 
 }
